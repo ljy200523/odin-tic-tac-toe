@@ -32,6 +32,9 @@ unless table.check_win
   table.print_board
   puts "Player one to place: "
   player_one_position = gets
+  table.check_win() ? break : next
+
   table.print_board
   puts "Player two to place: "
   player_two_position = gets
+  table.check_win() ? break : next
