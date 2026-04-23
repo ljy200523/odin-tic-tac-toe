@@ -8,7 +8,7 @@ end
 class Table
   attr_accessor :space, :place
   def initialize
-    @space = Array.new(3) {Array.new(3, "placeholder")} 
+    @space = Array.new(3) {Array.new(3, " ")} 
   end
   def place(player, row, col)
     @space[row][col] = player
@@ -17,12 +17,21 @@ class Table
     three_in_a_row ? true : false
   end
   def print_board
-    p @space
+    @space.each {|subarray| p subarray }
   end
 end
 
 player_one = Players.new("X")
-puts player_one.name
+player_two = Players.new("O")
 table = Table.new
-table.place("X", 1, 2)
+table.place(player_one.name, 1, 2)
+table.place(player_two.name, 2, 2)
 table.print_board
+
+unless table.check_win
+  table.print_board
+  puts "Player one to place: "
+  player_one_position = gets
+  table.print_board
+  puts "Player two to place: "
+  player_two_position = gets
