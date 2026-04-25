@@ -11,16 +11,12 @@ class Table
     @space = Array.new(3) {Array.new(3, " ")}
   end
   def place(player, position)
-    if position.class == Array
-      row, col = position
-      @space[row][col] = player
-    end
-    if position.class == String
       row, col = position.split(", ")
       row = row.to_i
       col = col.to_i
+      puts "string: #{row}"
+      puts "string: #{col}"
       @space[row][col] = player
-    end
   end
   def check_win()
     for i in 0..2  #for loop, inclusive range from 0 to 2
@@ -47,45 +43,45 @@ class Table
   end
 end
 
-# player_one = Players.new("X")
-# player_two = Players.new("O")
-# table = Table.new
-# table.place(player_one.name, "0, 0")
-# table.place(player_two.name, "0, 1")
-# table.place(player_two.name, "0, 2")
-# table.place(player_two.name, "1, 0")
-# table.place(player_one.name, "1, 1")
-# table.place(player_one.name, "1, 2")
-# table.place(player_two.name, "2, 0")
-# table.place(player_one.name, "2, 1")
-# table.place(player_two.name, "2, 2")
-# table.print_board
-# puts table.check_win()
-# puts table.check_full()
-
 
 player_one = Players.new("X")
 player_two = Players.new("O")
 table = Table.new
 while true
-  table.print_board
-  puts "Player one to place: "
-  player_one_position = gets
-  table.place(player_one.name, player_one_position)
-  if table.check_win()
+  loop do
     table.print_board
-    puts "Player 1 wins"
-    break
+    puts "Player one to place: "
+    player_one_position = gets
+    coords = player_one_position.split(",").map(&:to_i)
+    if coords.all? { |num| (0..2).include?(num) }
+      table.place(player_one.name, player_one_position)
+      break
+    else
+      puts "Out of bounds!"
+    end
+  end
+  if table.check_win()
+  table.print_board
+  puts "Player 1 wins"
+  break
   end
   if table.check_full()
     table.print_board
     puts "It's a tie"
     break
   end
-  table.print_board
-  puts "Player two to place: "
-  player_two_position = gets
-  table.place(player_two.name, player_two_position)
+  loop do
+   table.print_board
+    puts "Player two to place: "
+    player_two_position = gets
+    coords_two = player_two_position.split(",").map(&:to_i)
+    if coords_two.all? { |num| (0..2).include?(num) }
+      table.place(player_two.name, player_two_position)
+      break
+    else
+      puts "Out of bounds!"
+    end
+  end
   if table.check_win()
     table.print_board
     puts "Player 2 wins"
@@ -97,4 +93,3 @@ while true
     break
   end
 end
-
