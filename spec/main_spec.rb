@@ -3,5 +3,6 @@ require_relative "../lib/table.rb"
 require_relative "../lib/main.rb"
 
 describe TicTacToe do
-
+  describe "#play" do
+    context 
 

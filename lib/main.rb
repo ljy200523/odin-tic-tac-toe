@@ -12,30 +12,38 @@ class TicTacToe
       @table.print_board
       player_one_position = @player_one.position_input
       @table.place(@player_one.name, player_one_position)
-      if @table.check_win()
-      @table.print_board
-      puts "Player 1 wins"
-      break
-      end
-      if @table.check_full()
-        @table.print_board
-        puts "It's a tie"
+      if check_condition(@player_one)
         break
       end
       @table.print_board
       player_two_position = @player_two.position_input
       @table.place(@player_two.name, player_two_position)
-      if @table.check_win()
-        @table.print_board
-        puts "Player 2 wins"
-        break
-      end
-      if @table.check_full()
-        @table.print_board
-        puts "It's a tie"
+      if check_condition(@player_two)
         break
       end
     end
+  end
+
+  def check_condition(player)
+    if @table.check_win
+      print_win_statement(player)
+      return true
+    elsif @table.check_full
+      print_tie_statement
+      return true
+    else
+      return false
+    end
+  end
+
+  def print_win_statement(player)
+    @table.print_board
+    puts "Player #{player.name} wins"
+  end
+
+  def print_tie_statement
+    @table.print_board
+    puts "It's a tie"
   end
 end
 
