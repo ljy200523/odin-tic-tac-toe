@@ -3,10 +3,9 @@
     def initialize
       @space = Array.new(3) {Array.new(3, " ")}
     end
-    def place(player, position)
-        row, col = position.split(", ")
-        row = row.to_i
-        col = col.to_i
+    def place(player, coords)
+        row = coords[0]
+        col = coords[1]
         puts "string: #{row}"
         puts "string: #{col}"
         @space[row][col] = player
