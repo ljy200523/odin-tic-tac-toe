@@ -6,8 +6,8 @@
     def place(player, coords)
         row = coords[0]
         col = coords[1]
-        puts "string: #{row}"
-        puts "string: #{col}"
+        # puts "string: #{row}"
+        # puts "string: #{col}"
         @space[row][col] = player
     end
     def check_win()

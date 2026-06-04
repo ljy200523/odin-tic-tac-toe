@@ -9,8 +9,7 @@ class Player
       player_position = gets
       coords = player_position.split(",").map(&:to_i)
       if coords.all? { |num| (0..2).include?(num) }
-        puts coords
-        return coords
+        return coords #Array of integers
       else
         puts "Out of bounds!"
       end
